@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Navigation System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Authentication Section -->
+        <div id="auth-section" class="section">
+            <h1 class="title">Campus Navigation System</h1>
+            <div class="auth-box">
+                <div class="tab-buttons">
+                    <button id="login-tab" class="tab-btn active" onclick="showLogin()">Login</button>
+                    <button id="register-tab" class="tab-btn" onclick="showRegister()">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form" class="form-container">
+                    <h2>Login</h2>
+                    <input type="email" id="login-email" placeholder="Email" class="input-field">
+                    <input type="password" id="login-password" placeholder="Password" class="input-field">
+                    <button onclick="login()" class="btn-primary">Login</button>
+                    <p id="login-message" class="message"></p>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="form-container hidden">
+                    <h2>Register</h2>
+                    <input type="email" id="register-email" placeholder="Email" class="input-field">
+                    <input type="password" id="register-password" placeholder="Password" class="input-field">
+                    <input type="password" id="register-confirm" placeholder="Confirm Password" class="input-field">
+                    <button onclick="register()" class="btn-primary">Register</button>
+                    <p id="register-message" class="message"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div id="nav-section" class="section hidden">
+            <div class="header">
+                <h1 class="title">Campus Navigation</h1>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+
+            <div class="nav-container">
+                <!-- Room Selection -->
+                <div class="selection-box">
+                    <h2>Select Route</h2>
+                    
+                    <div class="selection-mode">
+                        <button id="select-start-btn" class="mode-btn active" onclick="setSelectionMode('start')">
+                            🟢 Select Start
+                        </button>
+                        <button id="select-end-btn" class="mode-btn" onclick="setSelectionMode('end')">
+                            🔴 Select Destination
+                        </button>
+                    </div>
+
+                    <div class="room-search">
+                        <input type="text" id="room-search" placeholder="🔍 Search for a room..." class="search-input" oninput="filterRooms()">
+                    </div>
+
+                    <div class="floor-tabs">
+                        <button class="floor-tab active" onclick="showFloor(0)">Ground Floor</button>
+                        <button class="floor-tab" onclick="showFloor(1)">1st Floor</button>
+                        <button class="floor-tab" onclick="showFloor(2)">2nd Floor</button>
+                        <button class="floor-tab" onclick="showFloor(3)">3rd Floor</button>
+                        <button class="floor-tab" onclick="showFloor(-1)">All Rooms</button>
+                    </div>
+
+                    <div id="room-grid-container" class="room-grid-scroll">
+                        <!-- Rooms will be dynamically generated here -->
+                    </div>
+
+                    <div class="selection-display">
+                        <div class="selected-room">
+                            <strong>Start:</strong> <span id="start-room">Not selected</span>
+                        </div>
+                        <div class="selected-room">
+                            <strong>Destination:</strong> <span id="end-room">Not selected</span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button onclick="findShortestPath()" class="btn-primary">Find Shortest Path</button>
+                        <button onclick="findAlternativePath()" class="btn-secondary">Find Alternative Path</button>
+                        <button onclick="showGraph()" class="btn-secondary">View Graph</button>
+                        <button onclick="clearSelection()" class="btn-secondary">Clear Selection</button>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div class="results-box">
+                    <h2>Route Information</h2>
+                    <div id="results-content" class="results-content">
+                        <p class="placeholder">Select start and destination to find a route</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
